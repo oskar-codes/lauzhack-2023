@@ -16,45 +16,33 @@ async function extractHTMLContent(url) {
   }
 }
 
-function extractText(s) {
-  let pageContent = '';
-  let nCurlyBraces = 0;
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] === '<') {
-      while (s[i] !== '>') {
-        i++;
-      }
-      pageContent += ' ';
-    } else if (s[i] === '{') {
-      nCurlyBraces++;
-      while (nCurlyBraces > 0) {
-        i++
-        console.log(nCurlyBraces);
-        if (s[i] === '{') {
-          nCurlyBraces++;
-        } else if (s[i] === '}') {
-          nCurlyBraces--;
-        }
-      }
-      pageContent += ' ';
-    } else {
-      pageContent += s[i];
-    }
-  }
-  return pageContent;
-};
+function extractText(page) {
 
-export function extractTextFromPage(url) {
-  return extractHTMLContent(url)
+  return page.replace(/<script[^>]*>.+?<\/script>/g, '').replace(/<.+?>/g, ' ');
+};
+extractHTMLContent(targetURL)
     .then((htmlContent) => {
       if (htmlContent) {
-        return extractText(htmlContent);
+        console.log(extractText(htmlContent));
       } else {
-        return null;
+         console.log("err");
       }
     })
     .catch((error) => {
-      console.error(error.message);
-      return null;
+      console.error("err");
     });
-}
+
+export const extractTextFromPage = (url)=>{
+    return extractHTMLContent(url)
+      .then((htmlContent) => {
+        if (htmlContent) {
+          return extractText(htmlContent);
+        } else {
+          return null;
+        }
+      })
+      .catch((error) => {
+        console.error(error.message);
+        return null;
+      });
+  }
