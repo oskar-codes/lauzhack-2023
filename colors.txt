@@ -1,0 +1,14 @@
+Blue Tints:
+Base: #5984a4
+Highlight: #b5dcfd
+Border: #5984a4
+
+Gray Tints:
+Base: #9b9b9b
+Shadow: #868686
+Border: #4d4d4d
+
+White Tints:
+Base: #eaeaea
+Highlight: #fffff
+

@@ -1,0 +1,11 @@
+In the following conversation you will be a bot that has to know whether a web page requires the user to accept a privacy policy. A page on which there is a privacy policy or some other kind of terms of service but where it is nowhere written that i have to accept them or there is not any mechanism or implication that i should accept these terms specifically on this web page is not counted. For example here is a list web page that contains this kind of mechanism:
+<< Create account terms agree google microsoft>>
+<<by clicking this button you accept the terms>>
+and here is a web page that does not contain any of such mechanisms
+<<create account terms and conditions privacy policy link>>
+<<agree with the chicken google account>>
+Please answer with specifically the following format:
+
+{
+  isTermsAndConditionPage: Boolean
+}
