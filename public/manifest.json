@@ -13,12 +13,15 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "Lauzhack 2023",
-    "default_popup": "popup.html"
+    "default_title": "Open Sidebar"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "sidePanel"
   ],
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
   "content_scripts": [
     {
       "matches": [
