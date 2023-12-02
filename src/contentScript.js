@@ -17,7 +17,8 @@ console.log('contentScript.js loaded');
 });
 
 function findTermsAndConditionsLinksInPage() {
-  return Array.from(document.getElementsByTagName('a')).filter((a) => a.innerText.toLowerCase().includes('terms') || a.innerText.toLowerCase().includes('conditions')).map((a) => a.href);
+  return Array.from(document.getElementsByTagName('a'))
+    .filter((a) => a.innerText.toLowerCase().includes('term') || a.innerText.toLowerCase().includes('condition'))
 }
 
 console.log(findTermsAndConditionsLinksInPage());
