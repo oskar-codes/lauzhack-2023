@@ -1,13 +1,13 @@
-document.getElementById('text').addEventListener('keypress', function (e) {
-    console.log(e.target.value)
-    if (e.key === 'Enter') {
+
+chrome.runtime.onMessage.addListener(({ name, data }) => {
+    console.log('Received message from background script: ', name, data);
+    if (name === 'message') {
         const p = document.createElement('p');
-        p.classList.add('user-message')
-        p.textContent = e.target.value;
+        p.classList.add('bot-message')
+        p.innerHTML = data;
+        document.getElementById('messages').innerHTML = '';
         document.getElementById('messages').append(p)
-        e.target.value = ''
         document.getElementById("messages").scrollBy(0, 10000);
     }
-
-
-})
+    return true;
+});

@@ -13,8 +13,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log('[ClauseGardian] Querying GPT-3.5');
     query(payload).then(result => {
       console.log('[ClauseGardian] GPT-3.5 response: ', result);
-      sendResponse(JSON.parse(result.choices[0].message.content));
-      console.log(JSON.parse(result.choices[0].message.content));
+      sendResponse((result.choices[0].message.content));
+      console.log((result.choices[0].message.content));
+      chrome.runtime.sendMessage({
+        name: 'message',
+        data: result.choices[0].message.content
+      });
     });
 
     return true;
@@ -28,3 +32,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
   }
 });
+
+// chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
+//   console.log('[ClauseGardian] Tab updated: ', tabId, info, tab);
+//   if (!tab.url) return;
+//   await chrome.sidePanel.setOptions({
+//     tabId,
+//     path: 'sidepanel.html',
+//     enabled: true
+//   });
+//   }
+// );

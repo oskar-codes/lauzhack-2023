@@ -1,14 +1,13 @@
-import elementVisible from 'element-visible';
 import { extractText, extractTextFromPage } from './extractTextFromPage.js';
 import { query } from './gpt.js';
 
 console.log('contentScript.js loaded');
 
-function findTermsAndConditionsLinksInPage() {
-  const links =Array.from(document.getElementsByTagName('a'))
-    .filter((a) => a.innerText.toLowerCase().includes('term') || a.innerText.toLowerCase().includes('condition'));
-  console.log(Array.from(document.getElementsByTagName('a'))
-    .filter(elementVisible))
+async function findTermsAndConditionsLinksInPage() {
+  const links = Array.from(document.getElementsByTagName('a'))
+    .filter((a) => a.innerText.toLowerCase().includes('privacy') ||
+                  a.innerText.toLowerCase().includes('term') || 
+                  a.innerText.toLowerCase().includes('condition'));
   return links;
 }
 
@@ -69,16 +68,16 @@ function createBox(link) {
 async function start() {
   console.log("[ClauseGardian] Detected potential terms and conditions...");
   
-  const res = await isTermsAndConditionsPage();
-  if (!res) {
-    console.log("[ClauseGardian] This is not a terms and conditions page.");
-    return;
-  }
+  // const res = await isTermsAndConditionsPage();
+  // if (!res) {
+  //   console.log("[ClauseGardian] This is not a terms and conditions page.");
+  //   return;
+  // }
 
-  console.log("[ClauseGardian] Confirmed that this is a terms and conditions page.");
+  // console.log("[ClauseGardian] Confirmed that this is a terms and conditions page.");
 
   // setupCSS();
-  const links = findTermsAndConditionsLinksInPage();
+  const links = await findTermsAndConditionsLinksInPage();
   console.log("[ClauseGardian] Found links: ", links);
   if (links.length === 0) {
     console.log("[ClauseGardian] No links found.");
@@ -107,21 +106,12 @@ The text you will be given is fetched from a websites text content and can conta
 They do however contain terms of service or privacy policies text contents somewhere.
 You are to analyze only these parts of the text and summarize them for the user. 
 The summary must be as concise as possible.
-The total length must be under 30 lines.
+The total length must be under 30 lines. VERY IMPORTANT to be under 30 lines it should not excess it
 Under no circumstances can you give a naive, useless and imprecise answer such as 
 "These Terms serve as the entire agreement between you and Atlassian regarding the Cloud Products and related matters", 
 instead if you come to this conclusion, start again and give more detail. 
 Always try to analyze the text to its fullest and never, under any circumstances give 1 sentence answers such as 
 "This document does not contain any useful information or problems."
-
-
-To format the whole document use the following syntax of a JSON object
-
-{problems: //string of the problems or empty string if no problems are found, content: a string that contains the rest of the information as instructed above, with "document section title<br> summary<br> problems<br><br>" //repeated as many times as necessary}
-do not include \\n anywhere in the output, only <br> as it is used to format the text in the web page  
-The output must be a valid JSON object.
-It absolutely, under all cases, no matter what, unequivocally, needs to follow the convention above of {problems: string, content: string}, 
-if it doesn't, regenerate it because it is considered garbage by the rest of the program and is therefore useless.
 
 Use authoritative language when summarize, for example :
 say "You must be at least 18 years old to join."
@@ -190,8 +180,7 @@ instead if you come to this conclusion, start again and give more detail.
 Always try to analyze the text to its fullest and never, under any circumstances give 1 sentence answers such as 
 "This document does not contain any useful information or problems."
 
-Remember to absolutely always follow the formatting laws, as they are the only way for the program to understand your answer.
-If the format is not {problems: string, content: string} it will not be accepted and I will die of sadness.
+If you ever skip a line please use a <br> tag so that it can be interpreted correctly and not cause errors
 The web page starts at ---.
 
 ---
@@ -231,21 +220,21 @@ async function isTermsAndConditionsPage() {
   return result.isTermsAndConditionPage; 
 }
 
-function search() {
+async function search() {
   console.log("[ClauseGardian] ClauseGardian searching...");
   const pageText = extractText(document.body.innerHTML).toLowerCase().trim();
   if ((pageText.includes('terms') ||
     pageText.includes('conditions')) &&
     (pageText.includes('agree') || pageText.includes('accept'))) {
-    start();
+    await start();
     return true;
   }
   return false;
 }
 
 (async () => {
-  const trySearch = () => {
-    if (!search()) {
+  const trySearch = async () => {
+    if (!(await search())) {
       setTimeout(trySearch, 1000);
     }
   }
