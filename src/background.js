@@ -11,6 +11,10 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'query') {
     const { payload } = request;
     console.log('[ClauseGardian] Querying GPT-3.5');
+    chrome.runtime.sendMessage({
+      name: 'loading',
+      data: 'Loading...'
+    });
     query(payload).then(result => {
       console.log('[ClauseGardian] GPT-3.5 response: ', result);
       sendResponse((result.choices[0].message.content));
