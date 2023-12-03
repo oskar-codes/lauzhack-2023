@@ -1,0 +1,90 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #fff;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Settings {
+    display: flex;
+    height: 10%;
+    padding: 10px;
+    background-color: #fff;
+    color: black;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+p,
+label {
+    width: 100%;
+    font:
+        1rem 'Fira Sans',
+        sans-serif;
+}
+
+input[type='Checkbox'] {
+    margin: 0.4rem;
+    box-sizing: border-box;
+}
+
+
+
+.ChatBoxArea {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 100%;
+    background-color: #fff;
+    color: black;
+    border-radius: 10px;
+}
+
+#messages {
+    overflow-y: scroll;
+    height: calc(100% - 80px);
+    background-color: rgb(164, 190, 212);
+    border-radius: 15px;
+    border: 2px solid black;
+    padding-top: 10px;
+    padding-right: 10px;
+
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.bot-message {
+    display: inline-block;
+    padding: 0 0 0 10px;
+    vertical-align: top;
+    width: 100%;
+}
+
+.user-message {
+    float: right;
+    width: 100%;
+    text-align: right;
+}
+
+input[type='text'] {
+    height: 60px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 10px;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
