@@ -1,21 +1,5 @@
 # <img src="public/icons/icon_48.png" width="45" align="left"> Lauzhack 2023
 
-My Chrome Extension
+## Clause Guardian
 
-## Features
-
-- Feature 1
-- Feature 2
-
-## Install
-
-[**Chrome** extension]() <!-- TODO: Add chrome extension link inside parenthesis -->
-
-## Contribution
-
-Suggestions and pull requests are welcomed!.
-
----
-
-This project was bootstrapped with [Chrome Extension CLI](https://github.com/dutiyesh/chrome-extension-cli)
-
+An AI powered bot that automatically summarizes the useful information of Terms of Service and such policies when it is needed to accept them e.g.: Creation of Account.
