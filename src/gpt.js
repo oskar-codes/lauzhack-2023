@@ -8,6 +8,6 @@ const openai = new OpenAI({
 export async function query(content) {
   return await openai.chat.completions.create({
     messages: [{ role: 'user', content }],
-    model: 'gpt-3.5-turbo',
+    model: 'gpt-3.5-turbo-16k',
   });
 }
