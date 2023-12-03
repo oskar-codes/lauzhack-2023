@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Lauzhack 2023",
+  "name": "ClauseGuardian",
   "version": "0.1.0",
   "description": "My Chrome Extension",
   "icons": {

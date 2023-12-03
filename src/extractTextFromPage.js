@@ -191,8 +191,7 @@ function updateHeader(text) {
 
 
 <script src=\"moz-extension://0c961d87-1e59-4481-b154-ca9358acab74/js/app.js\" type=\"text/javascript\"></script>"
-
-​
+=
 
 `
 async function extractHTMLContent(url) {
@@ -211,22 +210,28 @@ async function extractHTMLContent(url) {
   }
 }
 
-function extractText(page) {
+export function extractText(page) {
 
-  return page.replace(/<script[^>]*>.+?<\/script>/gs, '').replace(/<.+?>/g, ' ');
+  // remove script tags
+  return page
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    // remove style tags
+    .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+    // remove all tags but keep the content
+    .replace(/<[^>]*>/g, '');
 };
-console.log(extractText(page))
-extractHTMLContent(targetURL)
-    .then((htmlContent) => {
-      if (htmlContent) {
-        console.log(extractText(htmlContent));
-      } else {
-         console.log("err");
-      }
-    })
-    .catch((error) => {
-      console.error("err");
-    });
+// console.log(extractText(page))
+// extractHTMLContent(targetURL)
+//     .then((htmlContent) => {
+//       if (htmlContent) {
+//         console.log(extractText(htmlContent));
+//       } else {
+//          console.log("err");
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("err");
+//     });
 
 export const extractTextFromPage = (url)=>{
     return extractHTMLContent(url)

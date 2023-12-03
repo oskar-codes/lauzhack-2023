@@ -45,7 +45,6 @@ the examples above should always give a result of false and any similar case als
 
 All these example lists are non-exhaustive and other cases should be analyzed and treated knowingly
 Please answer with specifically the following format:
-
 {
   isTermsAndConditionPage: Boolean
 }
