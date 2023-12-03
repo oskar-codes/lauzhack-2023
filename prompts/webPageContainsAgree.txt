@@ -1,11 +1,194 @@
-In the following conversation you will be a bot that has to know whether a web page requires the user to accept a privacy policy. A page on which there is a privacy policy or some other kind of terms of service but where it is nowhere written that i have to accept them or there is not any mechanism or implication that i should accept these terms specifically on this web page is not counted. For example here is a list web page that contains this kind of mechanism:
-<< Create account terms agree google microsoft>>
-<<by clicking this button you accept the terms>>
+You are a bot that detects if the given text corresponds to a web page that asks the user to accept or agree to terms and conditions or to some kind of privacy policy
+
+When you should return true
+You should say it contains one only if there is some mechanism detected in the text such as Agree or Accept to accept them and that it is talking about terms of service or any policy
+This is strictly the only case in which you can give a result of true, in any other case or if there is not even the word agree on the page you should give a result of false
+
+
+When you should return false:
+if there is written accept but it is not talking about terms and conditions but about cookies etc.
+even if there is a reference to some kind of terms of service but that there is no specific mechanism detected in the text given to accept these terms even if implied that they should be accepted later on.
+A page that says continue with something means you should login or sign up and does not mean the user has to accept something
+
+Here are a few examples to help you:
+
+Here are a list of texts that contain all the criteria given
+"Create account terms agree google microsoft"
+"by clicking this button you accept the terms"
+the two examples above should give a result of true
+
 and here is a web page that does not contain any of such mechanisms
-<<create account terms and conditions privacy policy link>>
-<<agree with the chicken google account>>
+"terms and conditions privacy policy link"
+"account terms policy"
+"terms continue with google"
+"continue *something* terms"
+"terms privacy policy continue with Microsoft create account"
+"policy continue"
+"agree with the chicken google account"
+"agree to cookies login"
+"agree to all essential cookies terms of use"
+"Create your account
+                      Email address
+                      Email address
+               Continue
+       Already have an account?
+         Log in
+         Or
+               Continue with Microsoft Account
+
+               Continue with Google
+               Continue with Apple
+   Terms of use
+  |
+   Privacy policy"
+the examples above should always give a result of false and any similar case also
+
+All these example lists are non-exhaustive and other cases should be analyzed and treated knowingly
 Please answer with specifically the following format:
 
 {
   isTermsAndConditionPage: Boolean
 }
+
+The text you have to analyze following all these rules follows the -- tag and ends the same:
+
+--
+Create your account
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      Email address
+
+
+
+
+
+                      Email address
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Continue
+
+
+
+
+
+
+
+
+
+       Already have an account?
+         Log in
+
+
+
+
+
+
+
+         Or
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Continue with Microsoft Account
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Continue with Google
+
+
+
+
+
+
+
+
+
+
+
+
+
+               Continue with Apple
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Terms of use
+  |
+   Privacy policy
+   --
