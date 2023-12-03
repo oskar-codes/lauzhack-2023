@@ -24,6 +24,5 @@
   },
   "dependencies": {
     "openai": "^4.20.1"
-  },
-  "type": "module"
+  }
 }

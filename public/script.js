@@ -8,6 +8,17 @@ document.getElementById('text').addEventListener('keypress', function (e) {
         e.target.value = ''
         document.getElementById("messages").scrollBy(0, 10000);
     }
+})    
+
+document.getElementById('precise').addEventListener('click', function (e) {
+    if (e.target.checked) {
+        console.log('Feur')
+    }  
+    
+    else {
+        console.log('Quoi')
+    }
+    
 
 
 })
