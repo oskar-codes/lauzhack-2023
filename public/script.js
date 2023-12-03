@@ -9,5 +9,17 @@ chrome.runtime.onMessage.addListener(({ name, data }) => {
         document.getElementById('messages').append(p)
         document.getElementById("messages").scrollBy(0, 10000);
     }
-    return true;
-});
+})    
+
+document.getElementById('precise').addEventListener('click', function (e) {
+    if (e.target.checked) {
+        console.log('Feur')
+    }  
+    
+    else {
+        console.log('Quoi')
+    }
+    
+
+
+})
