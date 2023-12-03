@@ -14,6 +14,7 @@
     "adm-zip": "^0.5.10",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.8.1",
+    "element-visible": "^1.0.3",
     "file-loader": "^6.2.0",
     "mini-css-extract-plugin": "^2.7.6",
     "prettier": "^2.8.8",

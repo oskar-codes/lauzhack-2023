@@ -5,7 +5,6 @@ and here is a web page that does not contain any of such mechanisms
 <<create account terms and conditions privacy policy link>>
 <<agree with the chicken google account>>
 Please answer with specifically the following format:
-
 {
   isTermsAndConditionPage: Boolean
 }
