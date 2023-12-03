@@ -14,6 +14,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     query(payload).then(result => {
       console.log('[ClauseGardian] GPT-3.5 response: ', result);
       sendResponse(JSON.parse(result.choices[0].message.content));
+      console.log(JSON.parse(result.choices[0].message.content));
     });
 
     return true;
